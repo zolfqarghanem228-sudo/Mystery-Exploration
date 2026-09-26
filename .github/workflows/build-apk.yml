@@ -36,14 +36,19 @@ jobs:
       - name: Download Godot 4.5.1
         run: |
           mkdir -p "$HOME/.local/share/godot"
+
           wget -nv \
             "https://downloads.godotengine.org/?version=4.5.1&flavor=stable&slug=linux.x86_64.zip&platform=linux.64" \
             -O "$HOME/.local/share/godot/godot.zip"
 
-          unzip -o "$HOME/.local/share/godot/godot.zip" \
+          unzip -o \
+            "$HOME/.local/share/godot/godot.zip" \
             -d "$HOME/.local/share/godot/"
 
-          GODOT_BIN=$(find "$HOME/.local/share/godot" -type f -name "Godot_v4.5.1-stable_linux.x86_64" | head -n 1)
+          GODOT_BIN=$(find "$HOME/.local/share/godot" \
+            -type f \
+            -name "Godot_v4.5.1-stable_linux.x86_64" \
+            | head -n 1)
 
           if [ -z "$GODOT_BIN" ]; then
             echo "Godot executable not found"
@@ -52,11 +57,13 @@ jobs:
           fi
 
           chmod +x "$GODOT_BIN"
+
           echo "GODOT_BIN=$GODOT_BIN" >> "$GITHUB_ENV"
 
       - name: Download Godot 4.5.1 Export Templates
         run: |
-          mkdir -p "$HOME/.local/share/godot/export_templates/4.5.1.stable"
+          mkdir -p \
+            "$HOME/.local/share/godot/export_templates/4.5.1.stable"
 
           wget -nv \
             "https://downloads.godotengine.org/?version=4.5.1&flavor=stable&slug=export_templates.tpz&platform=templates" \
@@ -68,7 +75,10 @@ jobs:
             "$HOME/.local/share/godot/export_templates/export_templates.tpz" \
             -d /tmp/godot_templates
 
-          TEMPLATE_DIR=$(find /tmp/godot_templates -type d -name "templates" | head -n 1)
+          TEMPLATE_DIR=$(find /tmp/godot_templates \
+            -type d \
+            -name "templates" \
+            | head -n 1)
 
           if [ -z "$TEMPLATE_DIR" ]; then
             echo "Export templates folder not found"
@@ -114,20 +124,43 @@ jobs:
           export_format=0
           EOF
 
+      - name: Check Godot project
+        run: |
+          "$GODOT_BIN" \
+            --headless \
+            --path "$GITHUB_WORKSPACE" \
+            --editor \
+            --quit \
+            --verbose
+
       - name: Export APK
         run: |
           mkdir -p build
 
-          "$GODOT_BIN" \
+          echo "Starting Android APK export..."
+          echo "This step has a maximum time of 15 minutes."
+
+          timeout 15m \
+            "$GODOT_BIN" \
             --headless \
+            --verbose \
             --path "$GITHUB_WORKSPACE" \
             --export-debug "Android" \
             "$GITHUB_WORKSPACE/build/Mystery-Exploration.apk"
 
       - name: Check APK
         run: |
-          ls -lh build/
-          test -f build/Mystery-Exploration.apk
+          echo "Checking generated APK..."
+
+          ls -lah build/
+
+          if [ ! -f "build/Mystery-Exploration.apk" ]; then
+            echo "APK was not created."
+            exit 1
+          fi
+
+          echo "APK created successfully:"
+          ls -lh "build/Mystery-Exploration.apk"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
