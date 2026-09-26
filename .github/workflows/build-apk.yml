@@ -1,4 +1,4 @@
-name: Build Android APk
+name: Build Android APK
 
 on:
   workflow_dispatch:
@@ -52,12 +52,10 @@ jobs:
 
           if [ -z "$GODOT_BIN" ]; then
             echo "Godot executable not found"
-            find "$HOME/.local/share/godot" -maxdepth 3 -type f
             exit 1
           fi
 
           chmod +x "$GODOT_BIN"
-
           echo "GODOT_BIN=$GODOT_BIN" >> "$GITHUB_ENV"
 
       - name: Download Godot 4.5.1 Export Templates
@@ -82,7 +80,6 @@ jobs:
 
           if [ -z "$TEMPLATE_DIR" ]; then
             echo "Export templates folder not found"
-            find /tmp/godot_templates -maxdepth 3 -type f
             exit 1
           fi
 
@@ -124,21 +121,11 @@ jobs:
           export_format=0
           EOF
 
-      - name: Check Godot project
-        run: |
-          "$GODOT_BIN" \
-            --headless \
-            --path "$GITHUB_WORKSPACE" \
-            --editor \
-            --quit \
-            --verbose
-
       - name: Export APK
         run: |
           mkdir -p build
 
           echo "Starting Android APK export..."
-          echo "This step has a maximum time of 15 minutes."
 
           timeout 15m \
             "$GODOT_BIN" \
@@ -150,16 +137,11 @@ jobs:
 
       - name: Check APK
         run: |
-          echo "Checking generated APK..."
-
-          ls -lah build/
-
           if [ ! -f "build/Mystery-Exploration.apk" ]; then
             echo "APK was not created."
             exit 1
           fi
 
-          echo "APK created successfully:"
           ls -lh "build/Mystery-Exploration.apk"
 
       - name: Upload APK
