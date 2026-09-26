@@ -1,10 +1,13 @@
-name: Diagnose Godot Import
+name: Build Android APK
 
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  diagnose:
+  build:
     runs-on: ubuntu-24.04
 
     steps:
@@ -23,6 +26,15 @@ jobs:
           accept-android-sdk-licenses: 'true'
           log-accepted-android-sdk-licenses: 'false'
           packages: ''
+
+      - name: Install Android requirements
+        run: |
+          sdkmanager --install \
+            "platform-tools" \
+            "platforms;android-35" \
+            "build-tools;35.0.0" \
+            "cmake;3.10.2.4988404" \
+            "ndk;28.1.13356709"
 
       - name: Download Godot 4.5.1
         run: |
@@ -49,43 +61,81 @@ jobs:
           chmod +x "$GODOT_BIN"
           echo "GODOT_BIN=$GODOT_BIN" >> "$GITHUB_ENV"
 
-      - name: Find problematic import
+      - name: Download Godot 4.5.1 Export Templates
         run: |
-          echo "Starting Godot import diagnosis..."
+          mkdir -p "$HOME/.local/share/godot/export_templates/4.5.1.stable"
 
-          set +e
+          wget -nv \
+            "https://downloads.godotengine.org/?version=4.5.1&flavor=stable&slug=export_templates.tpz&platform=templates" \
+            -O "$HOME/.local/share/godot/export_templates/export_templates.tpz"
 
-          timeout 10m \
-            "$GODOT_BIN" \
-            --headless \
-            --verbose \
-            --path "$GITHUB_WORKSPACE" \
-            --editor \
-            --quit \
-            2>&1 | tee godot-import.log
+          mkdir -p /tmp/godot_templates
 
-          EXIT_CODE=${PIPESTATUS[0]}
+          unzip -o \
+            "$HOME/.local/share/godot/export_templates/export_templates.tpz" \
+            -d /tmp/godot_templates
 
-          echo ""
-          echo "===== LAST 100 LINES ====="
-          tail -100 godot-import.log
+          TEMPLATE_DIR=$(find /tmp/godot_templates \
+            -type d \
+            -name "templates" \
+            | head -n 1)
 
-          echo ""
-          echo "===== EXIT CODE ====="
-          echo "$EXIT_CODE"
-
-          if [ "$EXIT_CODE" -eq 124 ]; then
-            echo "Godot exceeded 10 minutes."
-            echo "The last output above is what we need to inspect."
+          if [ -z "$TEMPLATE_DIR" ]; then
+            echo "Export templates folder not found"
             exit 1
           fi
 
-          exit "$EXIT_CODE"
+          cp -r "$TEMPLATE_DIR"/* \
+            "$HOME/.local/share/godot/export_templates/4.5.1.stable/"
 
-      - name: Upload diagnosis log
-        if: always()
+      - name: Create Android export preset
+        run: |
+          cat > export_presets.cfg <<'EOF'
+          [preset.0]
+
+          name="Android"
+          platform="Android"
+          runnable=true
+          export_filter="all_resources"
+
+          [preset.0.options]
+
+          custom_template/debug=""
+          custom_template/release=""
+
+          package/unique_name="com.mysteryexploration.game"
+          package/name="Mystery Exploration"
+
+          version/code=1
+          version/name="1.0"
+
+          architecture/arm64-v8a=true
+          architecture/armeabi-v7a=false
+          architecture/x86_64=false
+          architecture/x86=false
+
+          export_format=0
+          EOF
+
+      - name: Export APK
+        run: |
+          mkdir -p build
+
+          timeout 45m \
+            "$GODOT_BIN" \
+            --headless \
+            --path "$GITHUB_WORKSPACE" \
+            --export-debug "Android" \
+            "$GITHUB_WORKSPACE/build/Mystery-Exploration.apk"
+
+      - name: Check APK
+        run: |
+          ls -lh build/
+          test -f build/Mystery-Exploration.apk
+
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Godot-import-diagnosis
-          path: godot-import.log
-          if-no-files-found: warn
+          name: Mystery-Exploration-APK
+          path: build/Mystery-Exploration.apk
+          if-no-files-found: error
