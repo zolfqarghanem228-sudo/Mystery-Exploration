@@ -33,6 +33,52 @@ jobs:
             "cmake;3.10.2.4988404" \
             "ndk;28.1.13356709"
 
+      - name: Download Godot 4.5.1
+        run: |
+          mkdir -p "$HOME/.local/share/godot"
+          wget -nv \
+            "https://downloads.godotengine.org/?version=4.5.1&flavor=stable&slug=linux.x86_64.zip&platform=linux.64" \
+            -O "$HOME/.local/share/godot/godot.zip"
+
+          unzip -o "$HOME/.local/share/godot/godot.zip" \
+            -d "$HOME/.local/share/godot/"
+
+          GODOT_BIN=$(find "$HOME/.local/share/godot" -type f -name "Godot_v4.5.1-stable_linux.x86_64" | head -n 1)
+
+          if [ -z "$GODOT_BIN" ]; then
+            echo "Godot executable not found"
+            find "$HOME/.local/share/godot" -maxdepth 3 -type f
+            exit 1
+          fi
+
+          chmod +x "$GODOT_BIN"
+          echo "GODOT_BIN=$GODOT_BIN" >> "$GITHUB_ENV"
+
+      - name: Download Godot 4.5.1 Export Templates
+        run: |
+          mkdir -p "$HOME/.local/share/godot/export_templates/4.5.1.stable"
+
+          wget -nv \
+            "https://downloads.godotengine.org/?version=4.5.1&flavor=stable&slug=export_templates.tpz&platform=templates" \
+            -O "$HOME/.local/share/godot/export_templates/export_templates.tpz"
+
+          mkdir -p /tmp/godot_templates
+
+          unzip -o \
+            "$HOME/.local/share/godot/export_templates/export_templates.tpz" \
+            -d /tmp/godot_templates
+
+          TEMPLATE_DIR=$(find /tmp/godot_templates -type d -name "templates" | head -n 1)
+
+          if [ -z "$TEMPLATE_DIR" ]; then
+            echo "Export templates folder not found"
+            find /tmp/godot_templates -maxdepth 3 -type f
+            exit 1
+          fi
+
+          cp -r "$TEMPLATE_DIR"/* \
+            "$HOME/.local/share/godot/export_templates/4.5.1.stable/"
+
       - name: Create Android export preset
         run: |
           cat > export_presets.cfg <<'EOF'
@@ -68,20 +114,24 @@ jobs:
           export_format=0
           EOF
 
-      - name: Export Android APK
-        id: export
-        uses: firebelley/godot-export@v8.0.0
-        with:
-          godot_executable_download_url: https://github.com/godotengine/godot-builds/releases/download/4.5.1-stable/Godot_v4.5.1-stable_linux_headless.64.zip
-          godot_export_templates_download_url: https://github.com/godotengine/godot-builds/releases/download/4.5.1-stable/Godot_v4.5.1-stable_export_templates.tpz
-          relative_project_path: ./
-          export_debug: true
-          archive_output: false
-          presets_to_export: Android
+      - name: Export APK
+        run: |
+          mkdir -p build
+
+          "$GODOT_BIN" \
+            --headless \
+            --path "$GITHUB_WORKSPACE" \
+            --export-debug "Android" \
+            "$GITHUB_WORKSPACE/build/Mystery-Exploration.apk"
+
+      - name: Check APK
+        run: |
+          ls -lh build/
+          test -f build/Mystery-Exploration.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Mystery-Exploration-APK
-          path: "**/*.apk"
+          path: build/Mystery-Exploration.apk
           if-no-files-found: error
