@@ -5,30 +5,26 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    name: Build APK
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Download project
+        uses: actions/checkout@v5
 
-      - name: Install Godot
+      - name: Setup Android
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK
         run: |
-          wget -q https://downloads.tuxfamily.org/godotengine/4.5/Godot_v4.5-stable_linux.x86_64.zip
-          unzip -q Godot_v4.5-stable_linux.x86_64.zip
-          chmod +x Godot_v4.5-stable_linux.x86_64
-          sudo mv Godot_v4.5-stable_linux.x86_64 /usr/local/bin/godot
+          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+          yes | sdkmanager --licenses || true
 
-      - name: Download export templates
-        run: |
-          mkdir -p ~/.local/share/godot/export_templates/4.5
-          wget -q https://downloads.tuxfamily.org/godotengine/4.5/Godot_v4.5-stable_export_templates.tpz
-          unzip -q Godot_v4.5-stable_export_templates.tpz -d /tmp/templates
-          cp -r /tmp/templates/templates/* ~/.local/share/godot/export_templates/4.5/
-
-      - name: Create Android preset
+      - name: Create Android export preset
         run: |
           cat > export_presets.cfg <<'EOF'
           [preset.0]
+
           name="Android"
           platform="Android"
           runnable=true
@@ -41,9 +37,9 @@ jobs:
           encrypt_directory=false
 
           [preset.0.options]
+
           custom_template/debug=""
           custom_template/release=""
-          gradle_build/use_gradle_build=false
           package/unique_name="com.mysteryexploration.game"
           package/name="Mystery Exploration"
           version/code=1
@@ -54,13 +50,17 @@ jobs:
           architecture/x86=false
           EOF
 
-      - name: Export APK
-        run: |
-          mkdir -p build
-          godot --headless --path . --export-debug "Android" build/Mystery-Exploration.apk
+      - name: Export Android APK
+        uses: NodotProject/godot-export@v7.0.0
+        with:
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.5/Godot_v4.5-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.5/Godot_v4.5-stable_export_templates.tpz
+          relative_project_path: ./
+          export_debug: true
+          presets_to_export: Android
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Mystery-Exploration-APK
-          path: build/Mystery-Exploration.apk
+          path: "**/*.apk"
