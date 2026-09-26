@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cmyqyjh1lkp80"]
+
+[ext_resource type="Script" uid="uid://c8r4eafvyup7p" path="res://State_Composite/pressable.gd" id="1_gun4q"]
+
+[node name="Pressable" type="Node" unique_id=1346886141 node_paths=PackedStringArray("button_obj")]
+script = ExtResource("1_gun4q")
+button_obj = NodePath("")

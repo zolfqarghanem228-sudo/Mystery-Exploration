@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://crssecwpsm3a0"]
+
+[ext_resource type="Script" uid="uid://y440uafuvgd8" path="res://settinglevels/com_room.gd" id="1_hjxf8"]
+
+[node name="COM_ROOM" type="Node" unique_id=542551650 groups=["COM_ROOM"]]
+script = ExtResource("1_hjxf8")

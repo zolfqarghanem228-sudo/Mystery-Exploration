@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://c5hd1bujcxg2j"]
+
+[ext_resource type="Script" uid="uid://bsowcpvitvpca" path="res://trapmonel/trapmonel.gd" id="1_bidf6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_kfyb0"]
+size = Vector3(1, 0.1, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_j7vdl"]
+data = PackedVector3Array(-0.5, 0.049999997, 0.5, 0.5, 0.049999997, 0.5, -0.5, -0.049999997, 0.5, 0.5, 0.049999997, 0.5, 0.5, -0.049999997, 0.5, -0.5, -0.049999997, 0.5, 0.5, 0.049999997, -0.5, -0.5, 0.049999997, -0.5, 0.5, -0.049999997, -0.5, -0.5, 0.049999997, -0.5, -0.5, -0.049999997, -0.5, 0.5, -0.049999997, -0.5, 0.5, 0.049999997, 0.5, 0.5, 0.049999997, -0.5, 0.5, -0.049999997, 0.5, 0.5, 0.049999997, -0.5, 0.5, -0.049999997, -0.5, 0.5, -0.049999997, 0.5, -0.5, 0.049999997, -0.5, -0.5, 0.049999997, 0.5, -0.5, -0.049999997, -0.5, -0.5, 0.049999997, 0.5, -0.5, -0.049999997, 0.5, -0.5, -0.049999997, -0.5, 0.5, 0.049999997, 0.5, -0.5, 0.049999997, 0.5, 0.5, 0.049999997, -0.5, -0.5, 0.049999997, 0.5, -0.5, 0.049999997, -0.5, 0.5, 0.049999997, -0.5, -0.5, -0.049999997, 0.5, 0.5, -0.049999997, 0.5, -0.5, -0.049999997, -0.5, 0.5, -0.049999997, 0.5, 0.5, -0.049999997, -0.5, -0.5, -0.049999997, -0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_habwe"]
+size = Vector3(0.9, 0.2, 0.9)
+
+[node name="trapmonel" type="Node3D" unique_id=1634105765]
+script = ExtResource("1_bidf6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1591832301]
+mesh = SubResource("BoxMesh_kfyb0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=1947281736]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=696191721]
+shape = SubResource("ConcavePolygonShape3D_j7vdl")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1901681066]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=320655472]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.037915707, 0)
+shape = SubResource("BoxShape3D_habwe")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://djyd4il30ci5i"]
+
+[ext_resource type="Script" uid="uid://bw8ugme2gy6yg" path="res://compression/compress_able.gd" id="1_jyx11"]
+
+[node name="compressAble" type="Node" unique_id=1206178480]
+script = ExtResource("1_jyx11")

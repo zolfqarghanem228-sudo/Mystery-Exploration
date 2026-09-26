@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cuvk23e7if2qg"]
+
+[ext_resource type="Script" uid="uid://c43lpmbfyhk3n" path="res://aplity/aplity.gd" id="1_oxxbv"]
+
+[node name="aplity" type="Node" unique_id=1291790548]
+script = ExtResource("1_oxxbv")

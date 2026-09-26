@@ -1,0 +1,245 @@
+[gd_scene format=3 uid="uid://msvkqba0nnik"]
+
+[ext_resource type="Script" uid="uid://bn0ccrxyvv8v" path="res://teleportBox/teleportable.gd" id="2_grbwk"]
+[ext_resource type="PackedScene" uid="uid://dqcmjhilxmd1i" path="res://button/button.tscn" id="3_ndh2t"]
+[ext_resource type="PackedScene" uid="uid://b64f3wnb23des" path="res://teleportBox/teleport_box.tscn" id="5_7a2mi"]
+[ext_resource type="Script" uid="uid://c6b6hnqtlwsha" path="res://magnet/magnet_able.gd" id="5_k8e1p"]
+[ext_resource type="Script" uid="uid://cndyqh3dqxo1b" path="res://Materail/outline_effect.gd" id="6_k8e1p"]
+[ext_resource type="PackedScene" uid="uid://djyd4il30ci5i" path="res://compression/compress_able.tscn" id="7_x6kai"]
+[ext_resource type="Script" uid="uid://c8r4eafvyup7p" path="res://State_Composite/pressable.gd" id="10_2jrte"]
+[ext_resource type="Script" uid="uid://ca2mkjs6fo4i7" path="res://State_Composite/composite_grape_porp.gd" id="12_s45e3"]
+[ext_resource type="PackedScene" uid="uid://b82eb2gvyj4rw" path="res://Drone/drone.tscn" id="12_yxvcb"]
+[ext_resource type="Script" uid="uid://bhd1pltg6v7w7" path="res://settinglevels/kill_out_range.gd" id="14_wjm6o"]
+[ext_resource type="PackedScene" uid="uid://c21r7wwacwrma" path="res://vehicle/car.tscn" id="14_yxvcb"]
+[ext_resource type="Script" uid="uid://dkgpr213em5bj" path="res://settinglevels/trans_room.gd" id="15_gnijk"]
+[ext_resource type="PackedScene" uid="uid://bycvhxoma65lh" path="res://settinglevels/room_trans.tscn" id="15_wjm6o"]
+[ext_resource type="Script" uid="uid://1p2rek28we1p" path="res://magnet/magnetized.gd" id="16_gnijk"]
+[ext_resource type="Script" uid="uid://bsgjulwv1ksdh" path="res://settinglevels/Normal_loader_levels.gd" id="17_k8e1p"]
+[ext_resource type="PackedScene" uid="uid://f84oq8tfp6q4" path="res://Door/door.tscn" id="18_unydg"]
+[ext_resource type="Script" uid="uid://y440uafuvgd8" path="res://settinglevels/com_room.gd" id="20_p07pb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vq6m5"]
+albedo_color = Color(0.45135868, 0.7933303, 1.540184e-06, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_effyl"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7a2mi"]
+points = PackedVector3Array(-0.25, -0.25, -0.25, 0.25, 0.25, 0.25, 0.25, -0.25, 0.25, 0.25, 0.25, -0.25, -0.25, 0.25, 0.25, 0.25, -0.25, -0.25, -0.25, -0.25, 0.25, -0.25, 0.25, -0.25)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fea26"]
+radius = 0.17480558
+
+[sub_resource type="BoxMesh" id="BoxMesh_grbwk"]
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wd0iw"]
+points = PackedVector3Array(0.50793654, 0.114263974, 0.50793654, -0.4717477, -0.099999994, -0.4717477, -0.4717477, -0.099999994, 0.4717477, -0.50793654, 0.114263974, -0.50793654, 0.4717477, -0.099999994, -0.4717477, -0.50793654, 0.114263974, 0.50793654, 0.50793654, 0.114263974, -0.50793654, 0.4717477, -0.099999994, 0.4717477)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s45e3"]
+size = Vector3(0.7, 0.1, 0.7)
+
+[sub_resource type="SphereMesh" id="SphereMesh_yxvcb"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wjm6o"]
+radius = 2.71817
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_grbwk"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_wd0iw"]
+sky_material = SubResource("ProceduralSkyMaterial_grbwk")
+
+[sub_resource type="Environment" id="Environment_s45e3"]
+background_mode = 1
+sky = SubResource("Sky_wd0iw")
+sdfgi_use_occlusion = true
+glow_enabled = true
+glow_normalized = true
+
+[node name="Node3D" type="Node3D" unique_id=1183808076]
+
+[node name="World" type="Node3D" parent="." unique_id=1014099372]
+
+[node name="Out_Range_Y" type="Node" parent="World" unique_id=1168164660]
+script = ExtResource("14_wjm6o")
+metadata/_custom_type_script = "uid://bhd1pltg6v7w7"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World" unique_id=306398932]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World" unique_id=2078357642]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018101215, -0.23279929, -0.025155783)
+use_collision = true
+collision_layer = 5
+collision_mask = 5
+size = Vector3(64.46582, 1.5146484, 65.480225)
+material = SubResource("StandardMaterial3D_vq6m5")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="World" unique_id=609077030]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.3528786, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/RigidBody3D" unique_id=1248469247]
+mesh = SubResource("BoxMesh_effyl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/RigidBody3D" unique_id=824150704]
+shape = SubResource("ConvexPolygonShape3D_7a2mi")
+
+[node name="Outline" type="Node" parent="World/RigidBody3D" unique_id=2072895066 node_paths=PackedStringArray("meshes")]
+script = ExtResource("6_k8e1p")
+meshes = [NodePath("../MeshInstance3D")]
+enable_outline = true
+sharp_edge = true
+metadata/_custom_type_script = "uid://cndyqh3dqxo1b"
+
+[node name="Composite_grape_porp" type="Node" parent="World/RigidBody3D" unique_id=79294212 node_paths=PackedStringArray("Area_Above_box", "RigidBody")]
+script = ExtResource("12_s45e3")
+Area_Above_box = NodePath("../Area3D")
+RigidBody = NodePath("..")
+metadata/_custom_type_script = "uid://ca2mkjs6fo4i7"
+
+[node name="TeleportAble" type="Node" parent="World/RigidBody3D" unique_id=1780133958]
+script = ExtResource("2_grbwk")
+metadata/_custom_type_script = "uid://bn0ccrxyvv8v"
+
+[node name="MagnetAble" type="Node" parent="World/RigidBody3D" unique_id=688370327]
+script = ExtResource("5_k8e1p")
+metadata/_custom_type_script = "uid://c6b6hnqtlwsha"
+
+[node name="Area3D" type="Area3D" parent="World/RigidBody3D" unique_id=2103988671]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/RigidBody3D/Area3D" unique_id=1047613709]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5104189, 0)
+shape = SubResource("SphereShape3D_fea26")
+
+[node name="compress" type="StaticBody3D" parent="World" unique_id=1473089046]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.053976, 0.57175016, 20.821718)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/compress" unique_id=1118675659]
+mesh = SubResource("BoxMesh_grbwk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/compress" unique_id=235523488]
+shape = SubResource("ConvexPolygonShape3D_wd0iw")
+
+[node name="compressAble" parent="World/compress" unique_id=1206178480 node_paths=PackedStringArray("owner_node", "Area") instance=ExtResource("7_x6kai")]
+owner_node = NodePath("..")
+Area = NodePath("../Area3D")
+
+[node name="Area3D" type="Area3D" parent="World/compress" unique_id=222623352]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14459896, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/compress/Area3D" unique_id=2099725153]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.026465178, 0)
+shape = SubResource("BoxShape3D_s45e3")
+
+[node name="Door" parent="World" unique_id=1254466763 node_paths=PackedStringArray("CompressAble_obj") instance=ExtResource("18_unydg")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14.474334, 1.5245249, 20.78546)
+Type_Button = 1
+CompressAble_obj = NodePath("../compress/compressAble")
+
+[node name="Door2" parent="World" unique_id=371289968 node_paths=PackedStringArray("PressAble_obj") instance=ExtResource("18_unydg")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14.474334, 1.5245249, 16.748686)
+PressAble_obj = NodePath("../button/Pressable")
+
+[node name="button" parent="World" unique_id=243089225 instance=ExtResource("3_ndh2t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.982359, 1.0245247, 16.720303)
+
+[node name="Pressable" type="Node" parent="World/button" unique_id=205316057 node_paths=PackedStringArray("button_obj")]
+script = ExtResource("10_2jrte")
+button_obj = NodePath("..")
+metadata/_custom_type_script = "uid://c8r4eafvyup7p"
+
+[node name="button2" parent="World" unique_id=1078800649 instance=ExtResource("3_ndh2t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.982359, 1.0245247, 10.665341)
+
+[node name="Pressable" type="Node" parent="World/button2" unique_id=773157331 node_paths=PackedStringArray("button_obj")]
+script = ExtResource("10_2jrte")
+button_obj = NodePath("..")
+metadata/_custom_type_script = "uid://c8r4eafvyup7p"
+
+[node name="button3" parent="World" unique_id=669635314 instance=ExtResource("3_ndh2t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.982359, 1.0245247, 6.1930256)
+
+[node name="Pressable" type="Node" parent="World/button3" unique_id=1446443935 node_paths=PackedStringArray("button_obj")]
+script = ExtResource("10_2jrte")
+button_obj = NodePath("..")
+metadata/_custom_type_script = "uid://c8r4eafvyup7p"
+
+[node name="button4" parent="World" unique_id=733224730 instance=ExtResource("3_ndh2t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.982359, 1.0245247, 3.0407233)
+
+[node name="Pressable" type="Node" parent="World/button4" unique_id=407478401 node_paths=PackedStringArray("button_obj")]
+script = ExtResource("10_2jrte")
+button_obj = NodePath("..")
+metadata/_custom_type_script = "uid://c8r4eafvyup7p"
+
+[node name="button5" parent="World" unique_id=1018973656 instance=ExtResource("3_ndh2t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.982359, 1.0245247, -0.7901592)
+
+[node name="Pressable" type="Node" parent="World/button5" unique_id=1773677594 node_paths=PackedStringArray("button_obj")]
+script = ExtResource("10_2jrte")
+button_obj = NodePath("..")
+metadata/_custom_type_script = "uid://c8r4eafvyup7p"
+
+[node name="teleportBox" parent="World" unique_id=226137127 node_paths=PackedStringArray("next_Box", "Button_Composite") instance=ExtResource("5_7a2mi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.458043, 1.0177394, 12.803193)
+Press_able = true
+next_Box = NodePath("../teleportBox2")
+Button_Composite = NodePath("../button2/Pressable")
+one_time = true
+
+[node name="teleportBox2" parent="World" unique_id=1528203905 instance=ExtResource("5_7a2mi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.4592, 1.0177394, 9.682768)
+
+[node name="Drone" parent="World" unique_id=48099401 node_paths=PackedStringArray("press") instance=ExtResource("12_yxvcb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.151507, 3.608745, 6.99359)
+press = NodePath("../button3/Pressable")
+
+[node name="car" parent="World" unique_id=1770820141 node_paths=PackedStringArray("press") instance=ExtResource("14_yxvcb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.478384, 0.77352, 1.8876319)
+press = NodePath("../button4/Pressable")
+
+[node name="Magnet" type="Node3D" parent="World" unique_id=1036902264]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.892509, 2.3374057, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Magnet" unique_id=1955151405]
+mesh = SubResource("SphereMesh_yxvcb")
+
+[node name="Magnetized" type="Node" parent="World/Magnet" unique_id=672508549 node_paths=PackedStringArray("owner_node", "AreaMagnetized")]
+script = ExtResource("16_gnijk")
+owner_node = NodePath("..")
+AreaMagnetized = NodePath("../Area3D")
+metadata/_custom_type_script = "uid://1p2rek28we1p"
+
+[node name="Area3D" type="Area3D" parent="World/Magnet" unique_id=1395119078]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Magnet/Area3D" unique_id=775841293]
+shape = SubResource("SphereShape3D_wjm6o")
+
+[node name="Marker3D" type="Marker3D" parent="World" unique_id=416382554 groups=["Marker_Aligment"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.282677, 0.39080906, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=286027701]
+environment = SubResource("Environment_s45e3")
+
+[node name="ThreadInstancer" type="Node3D" parent="." unique_id=54297076]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.975851, 0.17532492, -4.4128633)
+script = ExtResource("15_gnijk")
+metadata/_custom_type_script = "uid://dkgpr213em5bj"
+
+[node name="Room_Trans" parent="." unique_id=1306162280 instance=ExtResource("15_wjm6o")]
+transform = Transform3D(0.9891701, 0, 0.14677364, 0, 1, 0, -0.14677364, 0, 0.9891701, 17.975851, 0.17532492, -4.4128633)
+
+[node name="COM_ROOM" type="Node" parent="." unique_id=335637578 groups=["COM_ROOM"]]
+script = ExtResource("20_p07pb")
+metadata/_custom_type_script = "uid://y440uafuvgd8"
+
+[node name="loader_levels" type="Node" parent="." unique_id=1806126185]
+script = ExtResource("17_k8e1p")
+animtion = true
+anmtion_Node_code = null
+metadata/_custom_type_script = "uid://bsgjulwv1ksdh"
+
+[editable path="World/teleportBox"]
+[editable path="World/teleportBox2"]

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://5j604717bqki"]
+
+[ext_resource type="Script" uid="uid://bhd1pltg6v7w7" path="res://settinglevels/kill_out_range.gd" id="1_tkame"]
+
+[node name="kill_out_range" type="Node" unique_id=867374315]
+script = ExtResource("1_tkame")

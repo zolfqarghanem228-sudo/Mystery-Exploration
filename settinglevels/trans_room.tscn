@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cwxg2swu0t20e"]
+
+[ext_resource type="Script" uid="uid://dkgpr213em5bj" path="res://settinglevels/trans_room.gd" id="1_r0r62"]
+
+[node name="Trans_Room" type="Node3D" unique_id=1428728975]
+script = ExtResource("1_r0r62")
+type_parent = 2

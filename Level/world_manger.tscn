@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://co3cq4vmeu3aq"]
+
+[ext_resource type="Script" uid="uid://holdajbjvrab" path="res://settinglevels/world_manger.gd" id="1_7m8vl"]
+[ext_resource type="Script" uid="uid://y440uafuvgd8" path="res://settinglevels/com_room.gd" id="1_jg3fo"]
+[ext_resource type="PackedScene" uid="uid://c6e32gorm0p4m" path="res://Level/world_prototype.tscn" id="1_x76hg"]
+[ext_resource type="Script" uid="uid://bhd1pltg6v7w7" path="res://settinglevels/kill_out_range.gd" id="2_matk4"]
+[ext_resource type="PackedScene" uid="uid://bvmvkg45jxp3i" path="res://Player/player.tscn" id="4_7m8vl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_71guy"]
+
+[sub_resource type="Sky" id="Sky_dpyel"]
+sky_material = SubResource("ProceduralSkyMaterial_71guy")
+
+[sub_resource type="Environment" id="Environment_g47dr"]
+background_mode = 2
+sky = SubResource("Sky_dpyel")
+
+[node name="World_Manger" type="Node3D" unique_id=549753953 groups=["Manger"]]
+script = ExtResource("1_7m8vl")
+
+[node name="World_prototype" parent="." unique_id=1607275932 instance=ExtResource("1_x76hg")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1137225277]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+
+[node name="COM_ROOM" type="Node" parent="." unique_id=801577397 groups=["COM_ROOM"]]
+script = ExtResource("1_jg3fo")
+metadata/_custom_type_script = "uid://y440uafuvgd8"
+
+[node name="Out_Range_Y" type="Node" parent="." unique_id=1874789413 node_paths=PackedStringArray("owner_of_nodes")]
+script = ExtResource("2_matk4")
+owner_of_nodes = NodePath("..")
+metadata/_custom_type_script = "uid://bhd1pltg6v7w7"
+
+[node name="Player" parent="." unique_id=268663640 instance=ExtResource("4_7m8vl")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.12689924, -0.31956053, -0.05178356)
+speed_running = 4.0
+max_hight_jump = 1.0
+Sensevity = 0.002
+Fov_running = 85.0
+push_force = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=217264854]
+environment = SubResource("Environment_g47dr")
+
+[node name="Timer" type="Timer" parent="." unique_id=569592516]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

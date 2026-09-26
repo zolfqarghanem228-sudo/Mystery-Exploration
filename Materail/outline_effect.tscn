@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dlx3tdo5cieaj"]
+
+[ext_resource type="Script" uid="uid://cndyqh3dqxo1b" path="res://Materail/outline_effect.gd" id="1_giyvs"]
+
+[node name="Outline_effect" type="Node" unique_id=62727419]
+script = ExtResource("1_giyvs")
+enable_outline = true
+sharp_edge = true
+shader_outline_width = 0.03
+mesh_outline_width = 9.3
+animate = null
+animation_speed = null
+width_multiplier = null
+tween_type = null

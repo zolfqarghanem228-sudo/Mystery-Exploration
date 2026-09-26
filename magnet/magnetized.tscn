@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bsrb5drytn7b8"]
+
+[ext_resource type="Script" uid="uid://1p2rek28we1p" path="res://magnet/magnetized.gd" id="1_xurtv"]
+
+[node name="Magnetized" type="Node" unique_id=58689808]
+script = ExtResource("1_xurtv")
+enable_magnet = false

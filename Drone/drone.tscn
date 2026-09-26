@@ -1,0 +1,170 @@
+[gd_scene load_steps=18 format=3 uid="uid://b82eb2gvyj4rw"]
+
+[ext_resource type="Script" uid="uid://b5vunmke8xh8r" path="res://Drone/drone.gd" id="1_bsmjq"]
+[ext_resource type="PackedScene" uid="uid://kuxpk4ullvgw" path="res://State_Composite/composite_grape_porp.tscn" id="2_g44ys"]
+[ext_resource type="Shader" uid="uid://cgxe0a0n73cim" path="res://Drone/drone.gdshader" id="3_en4ly"]
+[ext_resource type="Texture2D" uid="uid://brfugennxm366" path="res://futuristic-panels1-albedo.png" id="3_m04rb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_omf3s"]
+albedo_texture = ExtResource("3_m04rb")
+
+[sub_resource type="BoxMesh" id="BoxMesh_vlid6"]
+size = Vector3(0.18, 0.1, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7o8lb"]
+albedo_texture = ExtResource("3_m04rb")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bsmjq"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pm4gi"]
+albedo_texture = ExtResource("3_m04rb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k6dvp"]
+albedo_texture = ExtResource("3_m04rb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p73qm"]
+albedo_texture = ExtResource("3_m04rb")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g44ys"]
+size = Vector3(0.18164063, 0.1, 0.5073242)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_en4ly"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_en4ly"]
+shader = ExtResource("3_en4ly")
+shader_parameter/drone_color = Color(0.015686275, 1, 0.8, 1)
+shader_parameter/color_intensity = 0.4
+shader_parameter/scanline_density = 130.882006216895
+shader_parameter/noise_amount = 0.06
+shader_parameter/transition_progress = 0.0
+
+[sub_resource type="Environment" id="Environment_en4ly"]
+fog_enabled = true
+fog_mode = 1
+fog_density = 1.0
+fog_depth_begin = 0.0
+fog_depth_end = 20.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_g44ys"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m04rb"]
+shader = ExtResource("3_en4ly")
+shader_parameter/drone_color = Color(0.9951549, 0.99566585, 0.99614185, 1)
+shader_parameter/color_intensity = 0.5
+shader_parameter/scanline_density = 300.00001425
+shader_parameter/noise_amount = 0.0
+shader_parameter/transition_progress = 1.0
+
+[node name="Drone" type="CharacterBody3D" node_paths=PackedStringArray("pivot_obj")]
+script = ExtResource("1_bsmjq")
+pivot_obj = NodePath("Marker3D")
+
+[node name="camera_pos" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15684307, 0.25742888)
+
+[node name="Composite_grape_porp" parent="." instance=ExtResource("2_g44ys")]
+
+[node name="graphic" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="graphic"]
+material_override = SubResource("StandardMaterial3D_omf3s")
+mesh = SubResource("BoxMesh_vlid6")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="graphic"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25499004, 0, -0.16131142)
+material_override = SubResource("StandardMaterial3D_7o8lb")
+mesh = SubResource("CylinderMesh_bsmjq")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="graphic"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24527872, 0, 0.1833739)
+material_override = SubResource("StandardMaterial3D_pm4gi")
+mesh = SubResource("CylinderMesh_bsmjq")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="graphic"]
+transform = Transform3D(1, -2.084509e-07, -0.00026179932, 2.0845067e-07, 1, -2.3670927e-09, 0.00026179932, 2.3468787e-09, 1, -0.23592483, 0, 0.1833739)
+material_override = SubResource("StandardMaterial3D_k6dvp")
+mesh = SubResource("CylinderMesh_bsmjq")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="graphic"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2581685, 0, -0.161)
+material_override = SubResource("StandardMaterial3D_p73qm")
+mesh = SubResource("CylinderMesh_bsmjq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0030273423)
+shape = SubResource("BoxShape3D_g44ys")
+
+[node name="head" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.18189746)
+current = true
+
+[node name="Grap_Area" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.0728292, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grap_Area"]
+shape = SubResource("SphereShape3D_en4ly")
+disabled = true
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.08422, 0)
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(517, 322)
+render_target_update_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport"]
+material = SubResource("ShaderMaterial_en4ly")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.16427293, 0.98641497, 0, -0.98641497, 0.16427295, 0, -0.15943094, 0.26394606)
+environment = SubResource("Environment_en4ly")
+current = true
+far = 20.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 922.0
+offset_top = 494.0
+offset_right = 1150.0
+offset_bottom = 646.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 930.0
+offset_top = 503.0
+offset_right = 1143.5435
+offset_bottom = 636.0
+texture = SubResource("ViewportTexture_g44ys")
+expand_mode = 1
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_m04rb")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="timer_of_die" type="Timer" parent="."]
+one_shot = true
+ignore_time_scale = true
+
+[connection signal="is_controled" from="." to="." method="_on_is_controled"]
+[connection signal="is_discontroled" from="." to="." method="_on_is_discontroled"]
+[connection signal="body_entered" from="Grap_Area" to="." method="_on_grap_area_body_entered"]
+[connection signal="body_exited" from="Grap_Area" to="." method="_on_grap_area_body_exited"]
+[connection signal="timeout" from="timer_of_die" to="." method="_on_timer_timeout"]

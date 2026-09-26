@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://kuxpk4ullvgw"]
+
+[ext_resource type="Script" uid="uid://ca2mkjs6fo4i7" path="res://State_Composite/composite_grape_porp.gd" id="1_t8c4q"]
+
+[node name="Composite_grape_porp" type="Node" unique_id=1632196199]
+script = ExtResource("1_t8c4q")

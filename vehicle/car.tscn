@@ -1,0 +1,194 @@
+[gd_scene format=4 uid="uid://c21r7wwacwrma"]
+
+[ext_resource type="Script" uid="uid://ctp1iso30wnt0" path="res://vehicle/car.gd" id="1_53kfb"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_oute6"]
+bounce = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_oute6"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.1
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_oute6"]
+_surfaces = [{
+"aabb": AABB(-0.21386719, -0.099999994, -0.26441652, 0.4402588, 0.45595703, 0.6555847),
+"attribute_data": PackedByteArray("AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAgD/mKGw/MdRtPwAAAAAAAIA/AACAPwAAgD/mKGw/WqHLPeYobD8x1G0/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAgD/mKGw/MdRtP+KitD0x1G0/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAgD/iorQ9MdRtP+KitD1aocs9AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AAIA/AAAAAOYobD9aocs9AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAAADiorQ9WqHLPeYobD9aocs9AAAAAAAAgD/iorQ9WqHLPQAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAOKitD1aocs9AACAPwAAAAAAAIA/AACAP8ztOz4AAAAAAACAPwAAAAAAAIA/AACAPwAAAAAAAAAAAACAPwAAgD8AAAAAAACAPwAAgD/M7Ts+AACAPwAAAAAAAIA/jQRRPwAAAACNBFE/AACAPwAAgD/M7Ts+AACAP8ztOz4AAAAAAACAPwAAAAAAAAAAjQRRPwAAAAAAAAAAAAAAAAAAAAAAAIA/AACAPwAAAAAAAIA/AACAPwAAgD/M7Ts+AAAAAAAAgD8AAAAAAACAPwAAgD/M7Ts+AACAP8ztOz4AAAAAAAAAAAAAgD8AAAAAzO07PgAAgD/M7Ts+"),
+"format": 34359738391,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 84,
+"vertex_data": PackedByteArray("AABbvszMzL2aYYe+AABbvgBAtj6aYYe+AABbvszMzL0yR8g+AABbvszMzL2aYYe+AABbvszMzL0yR8g+NNNnPszMzL2aYYe+AABbvszMzL2aYYe+NNNnPszMzL2aYYe+AABbvgBAtj6aYYe+AABbvgBAtj6aYYe+AAA7vgBAtj4UvFq+AABbvgBAtj4yR8g+AABbvgBAtj6aYYe+AAA7PgBAtj4UvFq+AAA7vgBAtj4UvFq+AABbvszMzL0yR8g+AABbvgBAtj6aYYe+AABbvgBAtj4yR8g+AABbvgBAtj4yR8g+AAA7vgBAtj4UvFq+AAA7vgBAtj4qrKo+AABbvszMzL0yR8g+AABbvgBAtj4yR8g+NNNnPgBAtj4yR8g+AABbvgBAtj4yR8g+AAA7vgBAtj4qrKo+AAA7PgBAtj4qrKo+AABbvszMzL0yR8g+NNNnPszMzL0yR8g+NNNnPszMzL2aYYe+AABbvszMzL0yR8g+NNNnPgBAtj4yR8g+NNNnPszMzL0yR8g+NNNnPszMzL2aYYe+NNNnPszMzL0yR8g+NNNnPgBAtj4yR8g+AABbvgBAtj6aYYe+NNNnPszMzL2aYYe+NNNnPgBAtj6aYYe+AABbvgBAtj6aYYe+NNNnPgBAtj6aYYe+AAA7PgBAtj4UvFq+NNNnPszMzL2aYYe+NNNnPgBAtj4yR8g+NNNnPgBAtj6aYYe+NNNnPgBAtj6aYYe+AAA7PgBAtj4qrKo+AAA7PgBAtj4UvFq+AABbvgBAtj4yR8g+AAA7PgBAtj4qrKo+NNNnPgBAtj4yR8g+NNNnPgBAtj6aYYe+NNNnPgBAtj4yR8g+AAA7PgBAtj4qrKo+AAA7vjizhbwUvFq+AAA7vjizhbwqrKo+AAA7vgBAtj4UvFq+AAA7vjizhbwUvFq+AAA7PjizhbwUvFq+AAA7vjizhbwqrKo+AAA7vjizhbwqrKo+AAA7PjizhbwqrKo+AAA7vgBAtj4qrKo+AAA7vjizhbwUvFq+AAA7vgBAtj4UvFq+AAA7PgBAtj4UvFq+AAA7vjizhbwqrKo+AAA7vgBAtj4qrKo+AAA7vgBAtj4UvFq+AAA7vjizhbwUvFq+AAA7PgBAtj4UvFq+AAA7PjizhbwUvFq+AAA7vjizhbwqrKo+AAA7PjizhbwUvFq+AAA7PjizhbwqrKo+AAA7PjizhbwUvFq+AAA7PgBAtj4qrKo+AAA7PjizhbwqrKo+AAA7PjizhbwUvFq+AAA7PgBAtj4UvFq+AAA7PgBAtj4qrKo+AAA7PjizhbwqrKo+AAA7PgBAtj4qrKo+AAA7vgBAtj4qrKo+AAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8//3///wAAAAD/f///AAAAAP9//////wAA/3///wAAAAD/f///AAAAAP9///8AAAAAAAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//////AAD/f///AAAAAP9//////wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8//3///wAAAAD/f/////8AAP9///8AAAAA////f/9//n////9//3/+f////3//f/5//3//////AAD/f/////8AAP9///8AAAAA/3//////AAD/f/////8AAP9//////wAA/3//////AAD/f/////8AAP9//////wAA////f/9/AID///9//38AgP///3//fwCA/3//////////f/////////9//////////////wAA/7//////AAD/v/////8AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+/////f/9/AID///9//38AgP///3//fwCA/3//fwAA/7//f/9/AAD/v/9//38AAP+//3//////////f/////////9/////////AAD/f/9/AIAAAP9//38AgAAA/3//fwCAAAD/f/9/AIAAAP9//38AgAAA/3//fwCA/////wAA/7//////AAD/v/////8AAP+/")
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qpp4j"]
+size = Vector3(0.43554688, 0.14960937, 0.541)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hm0to"]
+points = PackedVector3Array(-0.16810708, -0.0958814, -0.2644, -0.17748593, 0.36308253, -0.009469926, -0.21909809, 0.36308253, -0.009469926, -0.21909809, 0.36308253, -0.26957774, -0.21909809, -0.10520315, -0.009469926, -0.21909809, -0.10520315, -0.26957774, -0.16764951, -0.099999994, -0.012360004, -0.16810708, 0.35376078, -0.2644, -0.16618413, -0.0163, -0.005033843, -0.16707143, 0.36308253, -0.20714167)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_oute6"]
+points = PackedVector3Array(0.17417762, -0.0163, 0.020485822, 0.22639999, 0.34929228, 0.30251417, 0.17634317, 0.36308253, 0.31315237, 0.17417762, -0.0163, 0.3248475, 0.22639999, 0.012650586, 0.30251417, 0.22639999, 0.34929228, 0.042819135, 0.17634317, 0.36308253, 0.032180935, 0.22639999, 0.012650586, 0.042819135)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_53kfb"]
+points = PackedVector3Array(0.009857893, -0.011560287, 0.032180935, 0.22639999, -0.002077791, 0.31061947, 0.21744424, -0.099999994, 0.2991038, 0.009857893, -0.011560287, 0.31315237, 0.22639999, -0.002077791, 0.03471384, 0.020783486, -0.099999994, 0.0462295, 0.21744424, -0.099999994, 0.0462295, 0.020783486, -0.099999994, 0.2991038, 0.18259999, 0.004583845, 0.3286059, 0.18259999, 0.004583845, 0.016727421)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qpp4j"]
+points = PackedVector3Array(0.17417762, -0.0163, -0.20628808, 0.22639999, 0.34929228, 0.023512775, 0.17634317, 0.36308253, 0.032180935, 0.17417762, -0.0163, 0.041710284, 0.22639999, 0.012650586, 0.023512775, 0.22639999, 0.34929228, -0.18809058, 0.17634317, 0.36308253, -0.19675873, 0.22639999, 0.012650586, -0.18809058)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_11f6u"]
+points = PackedVector3Array(0.009857893, -0.011560287, -0.19675873, 0.22639999, -0.002077791, 0.030117087, 0.21744424, -0.099999994, 0.020733956, 0.009857893, -0.011560287, 0.032180935, 0.22639999, -0.002077791, -0.19469488, 0.020783486, -0.099999994, -0.18531175, 0.21744424, -0.099999994, -0.18531175, 0.020783486, -0.099999994, 0.020733956, 0.18259999, 0.004583845, 0.044772685, 0.18259999, 0.004583845, -0.20935048)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_u22ec"]
+points = PackedVector3Array(-0.16707143, -0.10520317, -0.009444445, 0.009819172, -0.011546031, 0.31315237, 0.009819172, -0.10520317, 0.31315237, 0.009819172, -0.011546031, -0.009444445, -0.16707143, -0.011546031, 0.31315237, -0.16707143, -0.10520317, 0.31315237, 0.009819172, -0.10520317, -0.009444445, -0.16707143, -0.011546031, -0.009444445)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ykfhi"]
+points = PackedVector3Array(-0.16764951, -0.099999994, -0.005860048, -0.17748593, 0.36308253, 0.31315237, -0.21909809, 0.36308253, 0.31315237, -0.17748593, 0.36308253, -0.009444445, -0.21909809, -0.10520315, 0.31315237, -0.21909809, -0.10520315, -0.009444445, -0.16764951, -0.099999994, 0.309568, -0.21909809, 0.36308253, -0.009444445, -0.16618413, -0.0163, -0.014946265, -0.16618413, -0.0163, 0.31865418)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rdv0x"]
+points = PackedVector3Array(-0.16707143, -0.10520317, -0.19675873, 0.009819172, -0.011546031, -0.00944446, 0.009819172, -0.10520317, -0.00944446, 0.009819172, -0.011546031, -0.19675873, -0.16707143, -0.011546031, -0.00944446, -0.16707143, -0.10520317, -0.00944446, 0.009819172, -0.10520317, -0.19675873, -0.16707143, -0.011546031, -0.19675873)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5jlat"]
+points = PackedVector3Array(0.009819172, 0.36308253, -0.20717528, -0.16707143, -0.10520315, -0.26959607, 0.009819172, -0.10520315, -0.26959607, -0.16510598, -0.099999994, -0.19756804, -0.16707143, 0.36308253, -0.26959607, 0.007853728, -0.099999994, -0.19756804, 0.009819172, 0.36308253, -0.26959607, -0.16707143, 0.36308253, -0.20717528, -0.17008826, -0.0163, -0.19551653, 0.012836004, -0.0163, -0.19551653)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2ys40"]
+points = PackedVector3Array(0.22836983, 0.36308253, 0.39640316, 0.012285796, -0.099999994, 0.31408542, 0.009857893, -0.10520315, 0.39640316, 0.22836983, -0.10520315, 0.39640316, 0.009857893, 0.36308253, 0.39640316, 0.22506496, 0.35599998, 0.3144195, 0.22594193, -0.099999994, 0.31408542, 0.009857893, 0.36308253, 0.32357398, 0.0061312187, -0.0163, 0.31174082, 0.17630854, 0.36308253, 0.3131605)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_q2l2i"]
+points = PackedVector3Array(0.17630854, 0.36308253, -0.19675875, 0.009857893, -0.10520315, -0.26959607, 0.22836983, -0.10520315, -0.26959607, 0.009857893, 0.36308253, -0.26959607, 0.012285796, -0.099999994, -0.19756804, 0.22836983, 0.36308253, -0.26959607, 0.22594193, -0.099999994, -0.19756804, 0.009857893, 0.36308253, -0.20717528, 0.22506496, 0.35599998, -0.19786038, 0.0061312187, -0.0163, -0.19551653)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sqx0f"]
+points = PackedVector3Array(0.009836495, 0.36308253, 0.32357398, -0.2139, -0.094560295, 0.3150524, 0.007292729, -0.099999994, 0.31408542, 0.009836495, -0.10520315, 0.39640316, -0.21910317, 0.36308253, 0.39640316, -0.2139, 0.35243967, 0.3150524, -0.21910317, -0.10520315, 0.39640316, 0.009836495, 0.36308253, 0.39640316, 0.013741012, -0.0163, 0.31174082, -0.17746556, 0.36308253, 0.3131605)
+
+[node name="car" type="VehicleBody3D" unique_id=1770820141]
+mass = 20.0
+physics_material_override = SubResource("PhysicsMaterial_oute6")
+script = ExtResource("1_53kfb")
+
+[node name="VehicleWheel3D" type="VehicleWheel3D" parent="." unique_id=657326328]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35456818, -0.1489951, 0.31245452)
+use_as_traction = true
+wheel_radius = 0.105
+damping_compression = 0.2
+damping_relaxation = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleWheel3D" unique_id=1745562063]
+transform = Transform3D(2.9802322e-08, 1, 0, -1, 2.9802322e-08, 0, 0, 0, 1, -0.043969214, 0, 0)
+mesh = SubResource("CylinderMesh_oute6")
+
+[node name="VehicleWheel3D2" type="VehicleWheel3D" parent="." unique_id=1448213056]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3529197, -0.1489951, -0.14019895)
+use_as_steering = true
+wheel_radius = 0.105
+damping_compression = 0.2
+damping_relaxation = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleWheel3D2" unique_id=358632554]
+transform = Transform3D(2.9802322e-08, 1, 0, -1, 2.9802322e-08, 0, 0, 0, 1, -0.043969214, 0, 0)
+mesh = SubResource("CylinderMesh_oute6")
+
+[node name="VehicleWheel3D3" type="VehicleWheel3D" parent="." unique_id=2030239530]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2743577, -0.1489951, 0.27672368)
+use_as_traction = true
+wheel_radius = 0.105
+damping_compression = 0.2
+damping_relaxation = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleWheel3D3" unique_id=1497857266]
+transform = Transform3D(2.9802322e-08, 1, 0, -1, 2.9802322e-08, 0, 0, 0, 1, -0.043969214, 0, 0)
+mesh = SubResource("CylinderMesh_oute6")
+
+[node name="VehicleWheel3D4" type="VehicleWheel3D" parent="." unique_id=458937022]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26561648, -0.1489951, -0.16154988)
+use_as_steering = true
+wheel_radius = 0.105
+damping_compression = 0.0
+damping_relaxation = 20.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleWheel3D4" unique_id=67668079]
+transform = Transform3D(2.9802322e-08, 1, 0, -1, 2.9802322e-08, 0, 0, 0, 1, -0.043969214, 0, 0)
+mesh = SubResource("CylinderMesh_oute6")
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="." unique_id=339142143]
+mesh = SubResource("ArrayMesh_oute6")
+
+[node name="base" type="CollisionShape3D" parent="." unique_id=1159606842]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.17456412, 0)
+shape = SubResource("BoxShape3D_qpp4j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1997708516]
+shape = SubResource("ConvexPolygonShape3D_hm0to")
+
+[node name="CollisionShape3D13" type="CollisionShape3D" parent="." unique_id=1835729681]
+shape = SubResource("ConvexPolygonShape3D_oute6")
+
+[node name="CollisionShape3D12" type="CollisionShape3D" parent="." unique_id=1856653394]
+shape = SubResource("ConvexPolygonShape3D_53kfb")
+
+[node name="CollisionShape3D11" type="CollisionShape3D" parent="." unique_id=116220924]
+shape = SubResource("ConvexPolygonShape3D_qpp4j")
+
+[node name="CollisionShape3D10" type="CollisionShape3D" parent="." unique_id=1509285101]
+shape = SubResource("ConvexPolygonShape3D_11f6u")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="." unique_id=1133447889]
+shape = SubResource("ConvexPolygonShape3D_u22ec")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="." unique_id=1096508686]
+shape = SubResource("ConvexPolygonShape3D_ykfhi")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="." unique_id=276441342]
+shape = SubResource("ConvexPolygonShape3D_rdv0x")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="." unique_id=257424890]
+shape = SubResource("ConvexPolygonShape3D_5jlat")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="." unique_id=1782532357]
+shape = SubResource("ConvexPolygonShape3D_2ys40")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=845758570]
+shape = SubResource("ConvexPolygonShape3D_q2l2i")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=810100790]
+shape = SubResource("ConvexPolygonShape3D_sqx0f")
+
+[node name="Detect_car_fliped" type="Node3D" parent="." unique_id=364950072]
+
+[node name="RayCast3D" type="RayCast3D" parent="Detect_car_fliped" unique_id=1887933718]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.027609408, 0, 0)
+target_position = Vector3(1, 0, 0)
+
+[node name="RayCast3D2" type="RayCast3D" parent="Detect_car_fliped" unique_id=1513856567]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06553531, 0, 0)
+target_position = Vector3(-1, 0, 0)
+
+[node name="RayCast3D3" type="RayCast3D" parent="Detect_car_fliped" unique_id=2144496901]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.10050696)
+target_position = Vector3(0, 0, 1)
+
+[node name="RayCast3D4" type="RayCast3D" parent="Detect_car_fliped" unique_id=1911401912]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.052333683)
+target_position = Vector3(0, 0, -1)
+
+[node name="RayCast3D5" type="RayCast3D" parent="Detect_car_fliped" unique_id=1098540125]
+target_position = Vector3(0, 1, 0)
+
+[node name="base_pivot" type="Marker3D" parent="." unique_id=1137147119]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.19305569, 0.039307594)
+
+[node name="checkground" type="RayCast3D" parent="." unique_id=1903211019]
+target_position = Vector3(0, -0.445, 0)
+
+[node name="induct_car_stuck" type="Timer" parent="." unique_id=1737220902]
+one_shot = true
+
+[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=884935852]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27844566, -0.32187682)
+
+[node name="head" type="Node3D" parent="SpringArm3D" unique_id=1695658505]
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D/head" unique_id=1396822441]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4429301, 0.30866176)
+current = true
+
+[connection signal="timeout" from="induct_car_stuck" to="." method="_on_induct_car_stuck_timeout"]

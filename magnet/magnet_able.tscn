@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bko1ffaedy681"]
+
+[ext_resource type="Script" uid="uid://c6b6hnqtlwsha" path="res://magnet/magnet_able.gd" id="1_whmio"]
+
+[node name="MagnetAble" type="Node" unique_id=256098381]
+script = ExtResource("1_whmio")

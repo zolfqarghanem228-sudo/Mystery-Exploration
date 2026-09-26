@@ -1,0 +1,245 @@
+[gd_scene format=3 uid="uid://msvkqba0nnik"]
+
+[ext_resource type="PackedScene" uid="uid://bvmvkg45jxp3i" path="res://Player/player.tscn" id="1_vq6m5"]
+[ext_resource type="Script" uid="uid://bn0ccrxyvv8v" path="res://teleportBox/teleportable.gd" id="2_grbwk"]
+[ext_resource type="PackedScene" uid="uid://kuxpk4ullvgw" path="res://State_Composite/composite_grape_porp.tscn" id="2_tl1hq"]
+[ext_resource type="PackedScene" uid="uid://b5y8tj0roh6vf" path="res://teleportBox/teleportable.tscn" id="3_fea26"]
+[ext_resource type="PackedScene" uid="uid://dqcmjhilxmd1i" path="res://button/button.tscn" id="3_ndh2t"]
+[ext_resource type="PackedScene" uid="uid://cmyqyjh1lkp80" path="res://State_Composite/pressable.tscn" id="4_effyl"]
+[ext_resource type="PackedScene" uid="uid://b64f3wnb23des" path="res://teleportBox/teleport_box.tscn" id="5_7a2mi"]
+[ext_resource type="Script" uid="uid://cndyqh3dqxo1b" path="res://Materail/outline_effect.gd" id="6_k8e1p"]
+[ext_resource type="Script" uid="uid://bhmkdxtby3d0s" path="res://compression/compress.gd" id="7_ludgr"]
+[ext_resource type="Script" uid="uid://bw8ugme2gy6yg" path="res://compression/compress_able.gd" id="7_x6kai"]
+[ext_resource type="PackedScene" uid="uid://b82eb2gvyj4rw" path="res://Drone/drone.tscn" id="9_ey0xx"]
+[ext_resource type="PackedScene" uid="uid://bef24bfvgd0wh" path="res://aplity/shapeAplity.tscn" id="11_wd0iw"]
+[ext_resource type="Script" uid="uid://ca2mkjs6fo4i7" path="res://State_Composite/composite_grape_porp.gd" id="12_s45e3"]
+[ext_resource type="Script" uid="uid://c43lpmbfyhk3n" path="res://aplity/aplity.gd" id="13_2jrte"]
+[ext_resource type="PackedScene" uid="uid://c21r7wwacwrma" path="res://vehicle/car.tscn" id="14_yxvcb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_grbwk"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_wd0iw"]
+sky_material = SubResource("ProceduralSkyMaterial_grbwk")
+
+[sub_resource type="Environment" id="Environment_s45e3"]
+background_mode = 2
+sky = SubResource("Sky_wd0iw")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vq6m5"]
+albedo_color = Color(0.45135868, 0.7933303, 1.540184e-06, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vq6m5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wjm6o"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tl1hq"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yxvcb"]
+size = Vector3(0.68359375, 0.42858887, 0.52441406)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hn20c"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_effyl"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_effyl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ludgr"]
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ey0xx"]
+points = PackedVector3Array(-0.5, -0.1, -0.5, -0.5, 0.1, -0.5, 0.5, -0.1, -0.5, -0.5, -0.1, 0.5, -0.5, 0.1, 0.5, 0.5, 0.1, -0.5, 0.5, -0.1, 0.5, 0.5, 0.1, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ludgr"]
+size = Vector3(1, 0.25148925, 1)
+
+[node name="Node3D" type="Node3D" unique_id=1183808076]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=286027701]
+environment = SubResource("Environment_s45e3")
+
+[node name="Drone" parent="." unique_id=48099401 node_paths=PackedStringArray("player", "press") instance=ExtResource("9_ey0xx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.545317, 2.946694)
+player = NodePath("../Player")
+press = NodePath("../button/Pressable")
+
+[node name="TeleportAble" type="Node" parent="Drone" unique_id=677990304]
+script = ExtResource("2_grbwk")
+metadata/_custom_type_script = "uid://bn0ccrxyvv8v"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=306398932]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=2078357642]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018101215, -0.23279929, -0.025155783)
+use_collision = true
+collision_layer = 5
+collision_mask = 5
+size = Vector3(20.873047, 1.5146484, 24.380615)
+material = SubResource("StandardMaterial3D_vq6m5")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=431843518]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.101069, 0.7904558, 0)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1751950510]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.101069, 0.8696976, 4.781827)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=267763662]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.497159, 4.011216)
+physics_material_override = SubResource("PhysicsMaterial_vq6m5")
+
+[node name="Composite_grape_porp" parent="RigidBody3D" unique_id=1634913028 node_paths=PackedStringArray("player", "Area_Above_box", "RigidBody") instance=ExtResource("2_tl1hq")]
+speed_after_graping = 1.5
+player = NodePath("../../Player")
+Area_Above_box = NodePath("../Area3D")
+RigidBody = NodePath("..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=821309780]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0043851733, 0, 0.004620552)
+mesh = SubResource("BoxMesh_wjm6o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=724056828]
+shape = SubResource("ConvexPolygonShape3D_tl1hq")
+
+[node name="teleportable" parent="RigidBody3D" unique_id=1330482207 instance=ExtResource("3_fea26")]
+
+[node name="Area3D" type="Area3D" parent="RigidBody3D" unique_id=620774358]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Area3D" unique_id=693866726]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85523343, 0)
+shape = SubResource("BoxShape3D_yxvcb")
+
+[node name="Outline" type="Node" parent="RigidBody3D" unique_id=449685184 node_paths=PackedStringArray("meshes")]
+script = ExtResource("6_k8e1p")
+meshes = [NodePath("../MeshInstance3D")]
+shader_outline_width = 9.3
+mesh_outline_width = 0.03
+animate = true
+animation_speed = 1.0
+width_multiplier = 1.0
+tween_type = 0
+metadata/_custom_type_script = "uid://cndyqh3dqxo1b"
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="." unique_id=1270906491]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.497159, 7.03973)
+physics_material_override = SubResource("PhysicsMaterial_vq6m5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2" unique_id=1232575751]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0043851733, 0, 0.004620552)
+mesh = SubResource("BoxMesh_hn20c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2" unique_id=1441950458]
+shape = SubResource("ConvexPolygonShape3D_tl1hq")
+
+[node name="button" parent="." unique_id=243089225 instance=ExtResource("3_ndh2t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7352636, 1.0245233, 3.1359653)
+
+[node name="Pressable" parent="button" unique_id=1346886141 node_paths=PackedStringArray("button_obj") instance=ExtResource("4_effyl")]
+button_obj = NodePath("..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="button/Pressable" unique_id=2100058869]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4064896, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="button/Pressable/StaticBody3D" unique_id=221862798]
+shape = SubResource("SphereShape3D_effyl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="button/Pressable/StaticBody3D" unique_id=878572651]
+mesh = SubResource("SphereMesh_effyl")
+
+[node name="teleportBox" parent="." unique_id=226137127 node_paths=PackedStringArray("next_Box") instance=ExtResource("5_7a2mi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5548944, 1.06673, -3.6174574)
+next_Box = NodePath("../teleportBox2")
+
+[node name="teleportBox2" parent="." unique_id=1233489385 node_paths=PackedStringArray("next_Box") instance=ExtResource("5_7a2mi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7121071, 1.06673, -3.6174574)
+next_Box = NodePath("../teleportBox")
+
+[node name="Marker3D" type="Marker3D" parent="teleportBox2" unique_id=2060310925]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2617106, 6.420615, 10.617328)
+
+[node name="compress" type="StaticBody3D" parent="." unique_id=76389670]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6384163, 0.59955764, 0)
+script = ExtResource("7_ludgr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="compress" unique_id=24358314]
+mesh = SubResource("BoxMesh_ludgr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="compress" unique_id=419991348]
+shape = SubResource("ConvexPolygonShape3D_ey0xx")
+
+[node name="Area3D" type="Area3D" parent="compress" unique_id=1365457446]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="compress/Area3D" unique_id=1592269943]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025744617, 0)
+shape = SubResource("BoxShape3D_ludgr")
+
+[node name="Compress_Able" type="Node" parent="compress" unique_id=1682889240 node_paths=PackedStringArray("Area")]
+script = ExtResource("7_x6kai")
+Area = NodePath("../Area3D")
+metadata/_custom_type_script = "uid://bw8ugme2gy6yg"
+
+[node name="Player" parent="." unique_id=268663640 instance=ExtResource("1_vq6m5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3781362, 0)
+max_hight_jump = 2.0
+Gravity = 9.8
+Sensevity = 0.005
+Speed_player = 2.0
+Bob_freq = 2.4
+Bob_Amp = 0.08
+neck_rot_deg = 3.0
+Force_fire_obj = 5
+push_force = 2
+speed_running = 4.0
+Fov_running = 120.0
+player_ride = false
+factor_gravity_pull = 1.6
+
+[node name="aplity" parent="." unique_id=733034251 node_paths=PackedStringArray("node_aplity") instance=ExtResource("11_wd0iw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3717601, 1.7114712, 0)
+node_aplity = NodePath("Aplity")
+
+[node name="Composite_grape_porp" type="Node" parent="aplity" unique_id=798772289 node_paths=PackedStringArray("player", "RigidBody")]
+script = ExtResource("12_s45e3")
+player = NodePath("../../Player")
+RigidBody = NodePath("..")
+metadata/_custom_type_script = "uid://ca2mkjs6fo4i7"
+
+[node name="Aplity" type="Node" parent="aplity" unique_id=481229810]
+script = ExtResource("13_2jrte")
+normal_speed = 4.0
+impluse = 7.0
+speed_run = 8.0
+max_hight = 5.0
+metadata/_custom_type_script = "uid://c43lpmbfyhk3n"
+
+[node name="Outline" type="Node" parent="aplity" unique_id=1831231920 node_paths=PackedStringArray("meshes")]
+script = ExtResource("6_k8e1p")
+meshes = [NodePath("../MeshInstance3D")]
+enable_outline = true
+shader_outline_width = 9.3
+mesh_outline_width = 0.03
+animate = null
+animation_speed = null
+width_multiplier = null
+tween_type = null
+metadata/_custom_type_script = "uid://cndyqh3dqxo1b"
+
+[node name="car" parent="." unique_id=1770820141 instance=ExtResource("14_yxvcb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02582264, 10.097428, -3.0415092)
+
+[node name="Composite_grape_porp" type="Node" parent="car" unique_id=224925204 node_paths=PackedStringArray("player", "RigidBody")]
+script = ExtResource("12_s45e3")
+Fov = 26.55
+player = NodePath("../../Player")
+RigidBody = NodePath("..")
+metadata/_custom_type_script = "uid://ca2mkjs6fo4i7"
+
+[connection signal="is_press" from="button/Pressable" to="button" method="_on_pressable_is_press"]
+[connection signal="is_compress" from="compress/Compress_Able" to="compress" method="_on_compress_able_is_compress"]
+[connection signal="is_discompress" from="compress/Compress_Able" to="compress" method="_on_compress_able_is_discompress"]
+
+[editable path="aplity"]
