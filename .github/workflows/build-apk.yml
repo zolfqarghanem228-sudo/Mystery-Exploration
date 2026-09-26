@@ -8,8 +8,9 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
+
       - name: Checkout project
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Setup Java 17
         uses: actions/setup-java@v6
@@ -51,11 +52,12 @@ jobs:
             | head -n 1)
 
           if [ -z "$GODOT_BIN" ]; then
-            echo "Godot executable not found"
+            echo "ERROR: Godot 4.5.1 executable not found."
             exit 1
           fi
 
           chmod +x "$GODOT_BIN"
+
           echo "GODOT_BIN=$GODOT_BIN" >> "$GITHUB_ENV"
 
       - name: Download Godot 4.5.1 Export Templates
@@ -79,12 +81,14 @@ jobs:
             | head -n 1)
 
           if [ -z "$TEMPLATE_DIR" ]; then
-            echo "Export templates folder not found"
+            echo "ERROR: Godot export templates folder not found."
             exit 1
           fi
 
           cp -r "$TEMPLATE_DIR"/* \
             "$HOME/.local/share/godot/export_templates/4.5.1.stable/"
+
+          echo "Godot 4.5.1 export templates installed."
 
       - name: Create Android export preset
         run: |
@@ -125,9 +129,15 @@ jobs:
         run: |
           mkdir -p build
 
-          echo "Starting Android APK export..."
+          echo "========================================"
+          echo "Starting Mystery Exploration APK export"
+          echo "========================================"
+          echo "Godot: 4.5.1"
+          echo "Platform: Android"
+          echo "Maximum export time: 45 minutes"
+          echo "========================================"
 
-          timeout 15m \
+          timeout 45m \
             "$GODOT_BIN" \
             --headless \
             --verbose \
@@ -135,13 +145,18 @@ jobs:
             --export-debug "Android" \
             "$GITHUB_WORKSPACE/build/Mystery-Exploration.apk"
 
-      - name: Check APK
+      - name: Verify APK
         run: |
+          echo "Checking APK..."
+
           if [ ! -f "build/Mystery-Exploration.apk" ]; then
-            echo "APK was not created."
+            echo "ERROR: APK was not created."
+            echo "Contents of build folder:"
+            ls -lah build/
             exit 1
           fi
 
+          echo "APK successfully created:"
           ls -lh "build/Mystery-Exploration.apk"
 
       - name: Upload APK
